@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct nodes
+{
+	char country[20];
+	char arr[3];
+	struct nodes *next;
+};
+struct nodes *start=NULL;
+struct nodes *createNode()
+{
+	struct nodes *n;
+	n=(struct nodes*)malloc(sizeof(struct nodes));
+	return(n);
+}
+void addnode()
+{
+  struct nodes *temp,*l;
+  temp=createNode();
+  scanf("%s %s",temp->country,temp->arr);
+  temp->next=NULL;
+  if(start==NULL)
+  {
+    start=temp;
+    l=temp;
+  }
+  else
+  {
+    // l=start;
+    // while(l!=NULL)
+    // {l=l->next;}
+    // l=temp;
+    l->next=temp;
+    l=l->next;
+  }
+
+}
+void deletenp()
+{
+  struct nodes *ch,*y,*b;
+  ch=start;
+  b=ch;
+  while(b!=NULL)
+  {
+  if(ch->arr[0]=='N')
+  {
+    y=ch;
+    ch=ch->next;
+    free(y);
+    b=b->next;
+  }
+  else{b=b->next;}
+
+}
+void printall()
+{
+  struct nodes *show;
+  show=start;
+  if(start==NULL)
+  {
+    printf("stack underflow");
+  }
+  else{
+  while(show!=NULL)
+  {
+    printf("%s ",show->country);
+    show=show->next;
+  }
+}
+
+
+int main()
+{
+	int n,m,i;
+
+
+	char arr1[]="ADD";
+	char arr2[]="DISPLAY";
+	char arr3[]="DEL";
+
+	scanf("%d",&n);
+	scanf("%d",&m);
+	char array[30];
+	for(i=0;i<m;i++)
+	{
+		scanf("%s",array);
+		if(!(strncmp(arr1,array,3)))
+		{
+      addnode();
+
+		}
+		else if(!(strncmp(arr2,array,7)))
+		{
+			printall();
+      printf("\n");
+		}
+    else if(!(strncmp(arr3,array,3)))
+    {
+      deletenp();
+    }
+    }
+  return 0;
+  }
